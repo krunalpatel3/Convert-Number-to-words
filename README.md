@@ -1,7 +1,7 @@
 # Convert Number to words.
 Convert number to words Indian units like thousand,lakes and crore in android.
 This can be used in bill and other thinks.
-Convert currency to words Indian units.
+Convert currency to words Indian units,Convert indian currency to words,Convert indian currency thousand,lakes and crore.
 
 ## Screenshots:-
 
