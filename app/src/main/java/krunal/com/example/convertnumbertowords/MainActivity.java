@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("meditTextNumber", meditTextNumber.getText().toString().trim());
                 String Outpur_Str = Currency.convertToIndianCurrency(meditTextNumber.getText().toString().trim());
                 Log.i("Outpur_Str", Outpur_Str);
+
                 mtextViewOutput.setText(Outpur_Str);
 
 

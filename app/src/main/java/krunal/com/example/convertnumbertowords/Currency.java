@@ -2,6 +2,7 @@ package krunal.com.example.convertnumbertowords;
 
 
 import android.text.TextUtils;
+import android.util.Log;
 
 
 import java.math.BigDecimal;
@@ -10,10 +11,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.IllegalFormatCodePointException;
 
-public class Currency {
+class Currency {
 
 
-    public static String convertToIndianCurrency(String num) {
+
+    static String convertToIndianCurrency(String num) {
 
         BigDecimal bd = new BigDecimal(num);
         long number = bd.longValue();
@@ -21,6 +23,7 @@ public class Currency {
         int decimal = (int) (bd.remainder(BigDecimal.ONE).doubleValue() * 100);
         int digits_length = String.valueOf(no).length();
         int i = 0;
+        String finalResult = "";
 
         ArrayList<String> str = new ArrayList<>();
         HashMap<Integer, String> words = new HashMap<>();
@@ -53,7 +56,7 @@ public class Currency {
         words.put(80, "Eighty");
         words.put(90, "Ninety");
 
-        String digits[] = {"", "Hundred", "Thousand", "Lakh", "Crore"};
+        String digits[] = {"", "Hundred", "Thousand", "Lakh", "Crore","Arab","Kharab","Nil","Padma","Shankh"};
 
         while (i < digits_length) {
             int divider = (i == 2) ? 10 : 100;
@@ -63,7 +66,11 @@ public class Currency {
             if (number > 0) {
                 int counter = str.size();
                 String plural = (counter > 0 && number > 9) ? "s" : "";
-                String tmp = (number < 21) ? words.get(Integer.valueOf((int) number)) + " " + digits[counter] + plural : words.get(Integer.valueOf((int) Math.floor(number / 10) * 10)) + " " + words.get(Integer.valueOf((int) (number % 10))) + " " + digits[counter] + plural;
+                String tmp = (number < 21) ? words.get(Integer.valueOf((int) number)) + " " +
+                        digits[counter] + plural :
+                        words.get(Integer.valueOf((int) Math.floor(number / 10) * 10))
+                                + " " + words.get(Integer.valueOf((int) (number % 10)))
+                                + " " + digits[counter] + plural;
                 str.add(tmp);
             } else {
                 str.add("");
@@ -76,12 +83,25 @@ public class Currency {
         Rupees = TextUtils.join(" ", str).trim();
 
 
-        String paise = (decimal) > 0 ? " And " + words.get(Integer.valueOf((int) (decimal - decimal % 10))) + " " + words.get(Integer.valueOf((int) (decimal % 10))) : "";
+        String paise = (decimal) > 0 ? " And " + words.get(
+                Integer.valueOf((int) (decimal - decimal % 10))) + " " +
+                words.get(Integer.valueOf((int) (decimal % 10))) : "";
         // AND FORTNY NINE PAISA
         if (!paise.isEmpty()) {
 
             paise = paise.concat(" Paise");
         }
-        return "Rupees " + Rupees + paise + " Only";
+
+        finalResult = "Rupees " + Rupees + paise + " Only";
+        return finalResult.replace("  " ," ")
+                .replace("   "," ");
     }
+
+
+
+
+
+
+
+
 }
