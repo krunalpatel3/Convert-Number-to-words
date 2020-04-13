@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
                 mtextViewOutput.setText(Outpur_Str);
 
-
             }
         });
 
